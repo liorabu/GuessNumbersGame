@@ -17,7 +17,7 @@ export default function App() {
     'open-sans-bold': require('./src/assets/fonts/OpenSans-Bold.ttf'),
     'open-sans': require('./src/assets/fonts/OpenSans-Regular.ttf'),
   });
- if (!fontsLoaded) {
+  if (!fontsLoaded) {
     return <AppLoading />;
   }
 
@@ -36,6 +36,7 @@ export default function App() {
   }
 
   let content = <StartGameScreen onStartGame={startGameHandler} />;
+  
   if (userNumber && guessRounds <= 0) {
     content = <GameScreen userChoice={userNumber} onGameOver={gameOverHandler} />;
   } else if (guessRounds > 0) {
