@@ -10,7 +10,7 @@ import AppLoading from 'expo-app-loading';
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
-  const [guessRounds, setGuessRounds] = useState(0);
+  const [pastGuesses, setPastGuesses] = useState([]);
   const [dataLoaded, setDataLoaded] = useState(false);
 
   let [fontsLoaded] = useFonts({
@@ -23,24 +23,24 @@ export default function App() {
 
   const startGameHandler = (selectedNumber) => {
     setUserNumber(selectedNumber);
-    setGuessRounds(0);
+    setPastGuesses(0);
   }
 
-  const gameOverHandler = numOfRounds => {
-    setGuessRounds(numOfRounds)
+  const gameOverHandler = pastGuesses => {
+    setPastGuesses(pastGuesses)
   }
 
   const newGameHandler = () => {
     setUserNumber(null);
-    setGuessRounds(0);
+    setPastGuesses(0);
   }
 
   let content = <StartGameScreen onStartGame={startGameHandler} />;
   
-  if (userNumber && guessRounds <= 0) {
+  if (userNumber && pastGuesses<=0) {
     content = <GameScreen userChoice={userNumber} onGameOver={gameOverHandler} />;
-  } else if (guessRounds > 0) {
-    content = <GameOverScreen roundsNumber={guessRounds} userNumber={userNumber} onRestart={newGameHandler} />;
+  } else if (pastGuesses > 0) {
+    content = <GameOverScreen roundsNumber={pastGuesses} userNumber={userNumber} onRestart={newGameHandler} />;
   }
 
   return (
